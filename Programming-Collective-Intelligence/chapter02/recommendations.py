@@ -64,6 +64,21 @@ def sim_pearson(prefs, p1, p2):
     return r
 
 
+def sim_tonimoto(prefs, person1, person2):
+    """tanimoto相似度计算"""
+    si = {}
+    # 判断有没有相同的数据，没有相同的数据则返回0
+    for item in prefs[person1]:
+        if item in prefs[person2]: si[item] = 1
+    # 如果两者没有共同之处，则返回0
+    if len(si) == 0: return 0
+    si_num = len(si)
+    person1_num = len(prefs[person1])
+    person2_num = len(prefs[person2])
+    res = float(si_num) / (person1_num + person2_num - si_num)
+    return res
+
+
 def topMatches(prefs, person, n=5, similarity=sim_pearson):
     """
     从反映偏好的字典中返回最为匹配者
@@ -160,7 +175,7 @@ def main():
     print(sim_pearson(critics, 'Lisa Rose', 'Gene Seymour'))
     print(topMatches(critics, 'Toby', n=5))
     print(getRecommendations(critics, 'Toby'))
-    print(getRecommendations(critics, 'Toby', similarity=sim_distance))
+    print(getRecommendations(critics, 'Toby', similarity=sim_tonimoto))
     movies = transformPrefs(critics)
     print(topMatches(movies, 'Superman Returns'))
     itemsim = calculateSimilarItems(critics)
