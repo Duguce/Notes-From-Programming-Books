@@ -4,6 +4,8 @@ import random
 import math
 from randomoptimize import randomoptimize
 from hillclimb import hillclimb
+from annealingoptimize import annealingoptimize
+from geneticoptimize import geneticoptimize
 
 people = [('Seymour', 'BOS'),
           ('Franny', 'DAL'),
@@ -73,6 +75,8 @@ def schedulecost(sol):
 if __name__ == '__main__':
     domain = [(0, 9)] * (len(people) * 2)
     # s = randomoptimize(domain, schedulecost)
-    s = hillclimb(domain, schedulecost)
+    # s = hillclimb(domain, schedulecost)
+    # s = annealingoptimize(domain, schedulecost)
+    s = geneticoptimize(domain, schedulecost)
     print(schedulecost(s))
     printschedule(s)
