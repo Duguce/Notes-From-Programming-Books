@@ -1,6 +1,10 @@
 # -*- coding: utf-8 -*-
 import random
 import math
+from randomoptimize import randomoptimize
+from geneticoptimize import geneticoptimize
+from hillclimb import hillclimb
+from annealingoptimize import annealingoptimize
 
 
 def printsolution(vec):
@@ -59,4 +63,7 @@ if __name__ == '__main__':
 
     # [(0,9),(0,8),(0,7),(0,6),...,(0,0)]
     domain = [(0, (len(dorms) * 2) - i - 1) for i in range(len(dorms) * 2)]
-    printsolution([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    # printsolution([0, 0, 0, 0, 0, 0, 0, 0, 0, 0])
+    s = randomoptimize(domain, dormcost)
+    dormcost(s)
+    printsolution(s)
